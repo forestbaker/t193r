@@ -74,7 +74,7 @@ while : ; do
 -- [U]pdate persenjataan hacking
 -- Membuat atau memodifikasi [W]ordlist
 -- Check [S]ecurity
--- [./se7en.sh --up] update script ini
+-- [./t193r.sh --up] update script ini
 ========================================
 BANNER
    echo -n "       [Untuk keluar, pilih \"X\"]
