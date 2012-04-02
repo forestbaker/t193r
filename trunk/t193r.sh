@@ -7,7 +7,7 @@
 # yang dikembangkan oleh t193r (Komunitas BackTrack UNPAM)                 #
 # Script ini memuat:                                                       #
 # 1. WPA/WEP autocracker                  [weefee.sh]                      #
-# 2. BackTrack 3rd party tools updater    [triger.sh]                      #
+# 2. BackTrack 3rd party tools updater    [trigger.sh]                     #
 # 3. Dictionary tools                     [deectee.sh]                     #
 # 4. Security checker tools               [nakedsec.sh]                    #
 ############################################################################
@@ -45,7 +45,7 @@ wifi () {
 
 update () {
    clear
-   bash triger/triger.sh
+   bash trigger/trigger.sh
 }
 
 wordlist () {

@@ -43,7 +43,7 @@ Beberapa hal yang bisa dikembangkan dari script ini:
    -- Benchmarking [hitung mundur kapan proses cracking akan selesai]
 2. deectee.sh
    [KAMI MEMBUTUHKAN IDE DARI PARTISIPAN, KONTAK KAMI DI BAWAH FILE INI]
-3. triger.sh
+3. trigger.sh
    -- Tambahan update dari subversion atau GIT, auto config, auto build ;]
    [KAMI MEMBUTUHKAN IDE DARI PARTISIPAN, KONTAK KAMI DI BAWAH FILE INI]
 4. nakedsec.sh
