@@ -323,7 +323,8 @@ if [ "$(dpkg -l | awk '{print $2}' | grep -w aircrack-ng)" == "" ]; then
 fi
 #------------------------------MACCHANGER------------------------------#
 tampil info "Mengecek macchanger"
-if [ $(dpkg -l | awk '{print $2}' | grep -w "macchanger") == "" ]; then
+checkmac=( $(dpkg -l | awk '{print $2}' | grep -w "macchanger") )
+if [ "$checkmac" == "" ]; then
    echo -e "\e[0;31mPaket macchanger belum terinstal!!!\e[00m"
    echo -en '\e[37;44m'"\033[1mApakah kamu mau menginstall paket MacChanger? (y/n) => \033[0m "
    read choice

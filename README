@@ -55,7 +55,7 @@ Script ini memuat beberapa script yang kami buat sendiri, diantaranya:
    password, remove komentar, split atau menggabungkan wordlsit(s), dan menghapus karakter
    non-ASCII di dalam wordlsit. Script ini sudah dalam versi stabil, namun masih butuh
    penambahan beberapa fitur. Silakan baca TODO untuk mengetahui project kami selanjutnya.
-3. triger.sh
+3. trigger.sh
    Adalah BASH script yang berfungsi untuk mempermudah kita dalam melakukan UPDATE pada
    beberapa tools dalam BackTrack yang tidak tersedia setiap hari di repository utama,
    seperti Metasploit Framework, SQLMap, Social Engineering Toolkit, W3AF, dan Exploit-DB.
