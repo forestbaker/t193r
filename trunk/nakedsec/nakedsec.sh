@@ -320,7 +320,7 @@ sleep 1" "true"
             loopBlock="false" # Menghentikan proses looping
          else
             tampil error "Pilihan tidak valid [$REPLY] (y/n)"
-            loopBlock="true" # Proses looping masih berlanjut
+            loopBlock="true"  # Proses looping masih berlanjut
          fi
       done
    fi
@@ -334,7 +334,7 @@ tutupPort () {
    while [ $loopMain != "false" ] ; do
       netstat -lpn | grep -w "tcp" > /tmp/netstat.tmp
       arrayProto=( $(cat /tmp/netstat.tmp | awk '{print $1}') )
-      arrayPort=( $(cat /tmp/netstat.tmp | awk '{print $4}' | sed "s/0.0.0.0://") )
+      arrayPort=( $(cat /tmp/netstat.tmp | awk '{print $4}' | sed "s/0.0.0.0://" | sed "s/127.0.0.1://" | sed "s/::1://") )
       arrayState=( $(cat /tmp/netstat.tmp | awk '{print $6}') )
       arrayNamaProses=( $(cat /tmp/netstat.tmp | awk '{print $7}' | sed "s/.*\///") )
       arrayPID=( $(cat /tmp/netstat.tmp | awk '{print $7}' | sed "s/\/.*//") )
@@ -348,20 +348,20 @@ tutupPort () {
             index=$(($index+1))
          done
          tampil info "Berikut adalah daftar port yang terbuka"
-         echo -e " No. | Proto | Port | Status | Nama Proses | PID \n-----|-------|------|--------|-------------|------"
+         echo -e " No. | Proto | Port | Status |    Nama Proses    | PID \n-----|-------|------|--------|-------------------|------"
          loop=${#arrayNamaProses[@]}
          for (( i=0;i<$loop;i++)); do
-            printf ' %-3s | %-5s | %-4s | %-6s | %-11s | %-2s\n' "$(($i+1))" "${arrayProto[${i}]}" "${arrayPort[${i}]}" "${arrayState[${i}]}" "${arrayNamaProses[${i}]}" "${arrayPID[${i}]}"
+            printf ' %-3s | %-5s | %-4s | %-6s | %-17s | %-2s\n' "$(($i+1))" "${arrayProto[${i}]}" "${arrayPort[${i}]}" "${arrayState[${i}]}" "${arrayNamaProses[${i}]}" "${arrayPID[${i}]}"
          done
          loopSub="true"
          while [ $loopSub != "false" ] ; do
-            echo -e "--------------------------------------------------"
+            echo -e "--------------------------------------------------------"
             read -p "E[x]it, [r]efresh, kem[b]ali ke menu utama, atau pilih nomor yang akan ditutup: "
-            if [ $REPLY == "x" ] ; then
+            if [ $REPLY == "x" ] || [ $REPLY == "X" ] ; then
                cleanup
-            elif [ $REPLY == "r" ] ; then
+            elif [ $REPLY == "r" ] || [ $REPLY == "R" ] ; then
                tutupPort
-            elif [ $REPLY == "b" ] ; then
+            elif [ $REPLY == "b" ] || [ $REPLY == "B" ] ; then
                loopMain="false"
                loopSub="false"
             elif [ -z $(echo "$REPLY" | tr -dc '[:digit:]'l) ] ; then
