@@ -118,6 +118,19 @@ cek () {
       else
          missSet="true"
       fi
+#------------------------------Cek WPScan------------------------------#
+   elif [ "$1" == "wpscan" ] ; then
+      misswpscan=""
+      dirwpscan=""
+      wpscandir="/pentest/web/wpscan"
+      tampil aksi "Mengecek WPScan"
+      if [ -d "$wpscandir" ] ; then
+         misswpscan="false"
+         dirwpscan="$wpscandir"
+         tampil inform "Direktori WPScan = '$dirwpscan'"
+      else
+         misswpscan="true"
+      fi
 #------------------------------Cek SQLMap------------------------------#
    elif [ "$1" == "sqlmap" ] ; then
       missSqlmap=""
@@ -262,6 +275,39 @@ grab () {
             loop="true"
          fi
       done
+#------------------------------Install WPScan------------------------------#
+   elif [ "$1" == "wpscan" ] ; then
+      loop="true"
+      while [ "$loop" != "false" ] ; do
+         echo -en "[?] Apakah kamu mau menginstall WPScan? [y/n] "
+         read keputusan
+         if [ "$keputusan" == "y" ] || [ "$keputusan" == "Y" ] ; then
+            tampil aksi "Menginstall WPScan..."
+            apt-get install wpscan -y
+            tampil inform "Done"
+            loop="false"
+            l00p="true"
+            while [ "$l00p" != "true" ] ; do
+               echo -en "[?] Apakah kamu mau melakukan update? [y/n] "
+               read choice
+               if [ "$choice" == "y" ] || [ "$choice" == "Y" ] ; then
+                  update wpscan
+                  l00p="false"
+               elif [ "$choice" == "n" ] || [ "$choice" == "N" ] ; then
+                  sleep 2
+                  l00p="false"
+               else
+                  tampil error "Bad input"
+               fi
+            done
+         elif [ "$keputusan" == "n" ] || [ "$keputusan" == "N" ] ; then
+            sleep 1
+            loop="false"
+         else
+            tampil error "Pilihan tidak valid [$keputusan]"
+            loop="true"
+         fi
+      done
 #------------------------------Install SQLMap------------------------------#
    elif [ "$1" == "sqlmap" ] ; then
       loop="true"
@@ -382,6 +428,27 @@ update () {
          tampil error "SET tidak terinstall!"
          grab SET
       fi
+#------------------------------Update WPScan------------------------------#
+   elif [ "$1" == "wpscan" ] ; then
+      cek wpscan
+      cek koneksi
+      if [ "$misswpscan" == "false" ] ; then
+         if [ "$internet" == "true" ] ; then
+            tampil aksi "Memindahkan direktori yang aktif..."
+            cd "$dirwpscan"
+            tampil aksi "Melakukan update..."
+            svn update
+            tampil inform "Selesai"
+            tampil aksi "Memindahkan ke direktori awal..."
+            cd -
+            rm -f index.html* > /dev/null
+         elif [ "$internet" == "false" ] ; then
+            tampil error "Kamu tidak memiliki akses internet!"
+         fi
+      elif [ "$missSet" == "true" ] ; then
+         tampil error "WPScan tidak terinstall!"
+         grab wpscan
+      fi
 #------------------------------Update SQLMap------------------------------#
    elif [ "$1" == "sqlmap" ] ; then
       cek sqlmap
@@ -410,25 +477,27 @@ update () {
 while : ; do
 reset
      cat << BANNER
--------------------------------------------------------------
+------------------------------------------------------------------
                       t193r triger.sh
--------------------------------------------------------------
+------------------------------------------------------------------
 Script ini dapat mengupdate software-software berikut:
 [M]etasploit  --- Metasploit Framework
 [W]3af        --- Web Application Attack and Audit Framework
 [E]xploitDB   --- Vulnerability DB by Offensive Security
 [S]ET         --- Social Engineering Toolkit (ReL1K)
+W[P]Scan      --- Automatic Word Press CMS Vulnerabilirty Scanner
 S[Q]LMap      --- Automatic Database Takeover Control
 [A]ll         --- Update all
--------------------------------------------------------------
+------------------------------------------------------------------
 BANNER
-     read -p "[M/W/E/S/Q] atau [K]eluar : "
+     read -p "[M/W/E/S/P/Q] atau [K]eluar : "
      case "$REPLY" in
-          A|a) update metasploit; update w3af; update exploitdb; update SET; update sqlmap ;;
+          A|a) update metasploit; update w3af; update exploitdb; update SET; update wpscan; update sqlmap ;;
           M|m) update metasploit ;;
           W|w) update w3af ;;
           E|e) update exploitdb ;;
           S|s) update SET ;;
+          P|p) update wpscan ;;
           Q|q) update sqlmap ;;
       K|k|X|x) keluar ;;
           *) tampil error "Pilihan tidak valid $REPLY" && sleep 1 ;;
