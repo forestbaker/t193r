@@ -50,7 +50,7 @@ update () {
 
 wordlist () {
    clear
-   bash wordlist/deectee.sh
+   bash deectee/deectee.sh
 }
 
 nakedsec () {
