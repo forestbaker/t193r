@@ -64,17 +64,11 @@ cek () {
       fi
 #------------------------------Cek Metasploit------------------------------#
    elif [ "$1" == "metasploit" ] ; then
-      missMsf=""
-      msfDir=""
       tampil aksi "Mengecek Metasploit Framework"
       if [ -d "/opt/framework/" ] ; then
          missMsf="false"
-         msfDir="/opt/framework/msf3/"
-         tampil inform "Direktori Metasploit = '$msfDir'"
       elif [ -d "/opt/metasploit/" ] ; then
          missMsf="false"
-         msfDir="/opt/metasploit/msf3/"
-         tampil inform "Direktori Metasploit = '$msfDir'"
       else
          missMsf="true"
       fi
@@ -353,10 +347,8 @@ update () {
          grab metasploit
       elif [ "$missMsf" == "false" ] ; then
          if [ "$internet" == "true" ] ; then
-            tampil aksi "Memindahkan direktori yang aktif..."
-            cd "$msfDir"
             tampil aksi "Melakukan update..."
-            svn update
+            msfupdate
             tampil inform "Selesai (="
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
