@@ -350,8 +350,6 @@ update () {
             tampil aksi "Melakukan update..."
             msfupdate
             tampil inform "Selesai (="
-            tampil aksi "Memindahkan ke direktori awal..."
-            cd -
             rm -f index.html* > /dev/null
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
