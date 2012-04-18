@@ -332,13 +332,13 @@ tutupPort () {
    index="0"
    loopMain="true"
    while [ $loopMain != "false" ] ; do
-      netstat -lpn | grep -w "tcp" > /tmp/netstat.tmp
+      netstat -lpn | grep tcp > /tmp/netstat.tmp
       arrayProto=( $(cat /tmp/netstat.tmp | awk '{print $1}') )
-      arrayPort=( $(cat /tmp/netstat.tmp | awk '{print $4}' | sed "s/0.0.0.0://" | sed "s/127.0.0.1://" | sed "s/::1://") )
+      arrayPort=( $(cat /tmp/netstat.tmp | awk '{print $4}' | sed "s/0.0.0.0://" | sed "s/127.0.0.1://" | sed "s/::1://" | sed "s/::://") )
       arrayState=( $(cat /tmp/netstat.tmp | awk '{print $6}') )
       arrayNamaProses=( $(cat /tmp/netstat.tmp | awk '{print $7}' | sed "s/.*\///") )
       arrayPID=( $(cat /tmp/netstat.tmp | awk '{print $7}' | sed "s/\/.*//") )
-      cekcek=( $(netstat -lpn | grep -w "tcp") )
+      cekcek=( $(netstat -lpn | grep tcp) )
       if [ "$cekcek" == "" ] ; then
          tampil info "Tidak ada port yang terbuka..." 1>&2
          loopMain="false"
