@@ -351,6 +351,7 @@ update () {
             msfupdate
             tampil inform "Selesai (="
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
@@ -369,6 +370,7 @@ update () {
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
@@ -390,6 +392,7 @@ update () {
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
@@ -411,6 +414,7 @@ update () {
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
@@ -432,6 +436,7 @@ update () {
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
@@ -453,6 +458,7 @@ update () {
             tampil aksi "Memindahkan ke direktori awal..."
             cd -
             rm -f index.html* > /dev/null
+            sleep 3
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
