@@ -131,8 +131,9 @@ jtr_rules () {
    echo -e "Setiap kata akan di-mangle sebanyak 50 kali"
    echo -en "Tekan ENTER untuk melanjutkan: "
    read return
+   cd /pentest/passwords/john/
    if [ "$return" == "" ]; then
-      /usr/sbin/john --rules -w:$manglefile -stdout:63  > $mangleout
+      ./john --rules -w:$manglefile -stdout:63  > $mangleout
    fi
    cat $mangleout | while read line; do
       count=$[ $count + 1 ]
@@ -140,11 +141,12 @@ jtr_rules () {
    echo -e "$mangleout terletak di `pwd`"
    echo "Kembali ke menu utama ..."
    sleep 2
+   cd -
 }
 
 # Menghapus awalan spasi
 menghapus_awalan_spasi () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read inbeginwhite
    while [ ! -f $inbeginwhite ]; do
       echo "Wordlist tidak ditemukan!"
@@ -169,7 +171,7 @@ menghapus_awalan_spasi () {
 
 # Menghapus karakter non-ASCII
 menghapus_karakter_nonascii () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read innonascii
    while [ ! -f $incontrolm ]; do
       echo "Wordlist tidak ditemukan!"
@@ -193,7 +195,7 @@ menghapus_karakter_nonascii () {
 
 # Menghapus kata dalam wordlist yang mengandung kata tertentu
 menghapus_string_tertentu () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read inpattern
    while [ ! -f $inpattern ]; do
       echo "Wordlist tidak ditemukan!"
@@ -254,7 +256,7 @@ nomor_telepon () {
 
 # Menghapus comment
 menghapus_komentar () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read incomments
    while [ ! -f $incomments ]; do
       echo "Wordlist tidak ditemukan!"
@@ -279,7 +281,7 @@ menghapus_komentar () {
 
 # Menspesifikasikan jumlah karakter minimal dan maksimal di dalam wordlist
 minimal_maksimal () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read minmaxin
    while [ ! -f $minmaxin ]; do
       echo "Wordlist tidak ditemukan!"
@@ -307,7 +309,7 @@ minimal_maksimal () {
 
 # Full optimize
 optimasi () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read passfile
    while [ ! -f $passfile ]; do
       echo "Wordlist tidak ditemukan!"
@@ -448,7 +450,7 @@ gabungan () {
 
 # Memisahkan wordlist yang besar ke potongan-potongan kecil
 pisahkan () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read insplit
    while [ ! -f $insplit ]; do
       echo "Wordlist tidak ditemukan!"
@@ -476,7 +478,7 @@ pisahkan () {
 
 # Tiap kalimat di kapitalisasi di huruf terdepannya saja
 kapitalisasi () {
-   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst)"
+   echo -en "Masukkan path lengkap dari wordlist yang akan diproses. Misalkan (/home/loser/wordlist.lst): "
    read incapital
    while [ ! -f $incapital ]; do
       echo "Wordlist tidak ditemukan!"

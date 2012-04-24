@@ -205,7 +205,7 @@ Automatic WEP/WPA Cracker by t193r"
 tampil info "Wordlist=$wordlist"
 #------------------------------Melakukan Penyesuaian AirMon-ng------------------------------#
 tampil aksi "Menganalisa keadaan"
-aksi "Mempersiapkan airmon-ng" "airmon-ng check kill" "true"
+aksi "Mempersiapkan airmon-ng" "airmon-ng check kill && ifconfig wlan0 up" "true"
 sleep 2
 #------------------------------Cek User Sebagai ROOT------------------------------#
 if [ "$(id -u)" != "0" ] ; then
@@ -469,7 +469,7 @@ Are you blusp10it?" >> /root/weefee.key
       fi
       tampil aksi "Bergabung: $essid"
       if [ "$encryption" == "WEP" ] ; then
-         aksi "i[f/w]config" "ifconfig $interface down && iwconfig $interface essid $essid key $key && ifconfig $interface up"   "true"
+         aksi "i[f/w]config" "ifconfig $interface down && iwconfig $interface essid $essid key $key && ifconfig $interface up" "true"
       elif [ "$encryption" == "WPA" ] ; then
          aksi "wpa_passphrase" "wpa_passphrase $essid '$key' > /tmp/weefee.conf" "true"
          aksi "wpa_supplicant" "wpa_supplicant -B -i $interface -c /tmp/weefee.conf -D wext" "true"
@@ -481,6 +481,11 @@ Are you blusp10it?" >> /root/weefee.key
          tampil info "IP: $ourIP"
          gateway=$(route -n | grep $interface | awk '/^0.0.0.0/ {getline; print $2}')
          tampil info "Gateway: $gateway"
+      fi
+      echo -en "Tekan enter untuk mengakhiri koneksi ... "
+      read choice
+      if [ "$choice" == "" ]; then
+         echo "Done ..."
       fi
 #------------------------------KEY Tidak Ditemukan, Memindahkan Handshake------------------------------#
    elif [ "$encryption" == "WPA" ] ; then
