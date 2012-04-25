@@ -482,10 +482,10 @@ Are you blusp10it?" >> /root/weefee.key
          gateway=$(route -n | grep $interface | awk '/^0.0.0.0/ {getline; print $2}')
          tampil info "Gateway: $gateway"
       fi
-      echo -en "Tekan enter untuk mengakhiri koneksi ... "
+      tampil info "Tekan enter untuk mengakhiri koneksi ... "
       read choice
       if [ "$choice" == "" ]; then
-         echo "Done ..."
+         tampil info "Done ..."
       fi
 #------------------------------KEY Tidak Ditemukan, Memindahkan Handshake------------------------------#
    elif [ "$encryption" == "WPA" ] ; then
