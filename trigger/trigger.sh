@@ -114,17 +114,8 @@ cek () {
       fi
 #------------------------------Cek WPScan------------------------------#
    elif [ "$1" == "wpscan" ] ; then
-      misswpscan=""
-      dirwpscan=""
-      wpscandir="/pentest/web/wpscan"
       tampil aksi "Mengecek WPScan"
-      if [ -d "$wpscandir" ] ; then
-         misswpscan="false"
-         dirwpscan="$wpscandir"
-         tampil inform "Direktori WPScan = '$dirwpscan'"
-      else
-         misswpscan="true"
-      fi
+      tampil inform "Direktori WPScan = /pentest/web/wpscan"
 #------------------------------Cek SQLMap------------------------------#
    elif [ "$1" == "sqlmap" ] ; then
       missSqlmap=""
@@ -426,8 +417,7 @@ update () {
    elif [ "$1" == "wpscan" ] ; then
       cek wpscan
       cek koneksi
-      if [ "$misswpscan" == "false" ] ; then
-         if [ "$internet" == "true" ] ; then
+        if [ "$internet" == "true" ] ; then
             tampil aksi "Memindahkan direktori yang aktif..."
             cd "$dirwpscan"
             tampil aksi "Melakukan update..."
@@ -440,10 +430,6 @@ update () {
          elif [ "$internet" == "false" ] ; then
             tampil error "Kamu tidak memiliki akses internet!"
          fi
-      elif [ "$missSet" == "true" ] ; then
-         tampil error "WPScan tidak terinstall!"
-         grab wpscan
-      fi
 #------------------------------Update SQLMap------------------------------#
    elif [ "$1" == "sqlmap" ] ; then
       cek sqlmap
