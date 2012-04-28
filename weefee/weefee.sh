@@ -205,7 +205,9 @@ Automatic WEP/WPA Cracker by t193r"
 tampil info "Wordlist=$wordlist"
 #------------------------------Melakukan Penyesuaian AirMon-ng------------------------------#
 tampil aksi "Menganalisa keadaan"
-aksi "Mempersiapkan airmon-ng" "airmon-ng check kill && ifconfig wlan0 up" "true"
+aksi "Mempersiapkan airmon-ng" "airmon-ng check kill" "true"
+tampil aksi "Mengaktifkan wlan0"
+aksi "Mempersiapkan airmon-ng" "ifconfig wlan0 up" "true"
 sleep 2
 #------------------------------Cek User Sebagai ROOT------------------------------#
 if [ "$(id -u)" != "0" ] ; then
